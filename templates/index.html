@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="weather-container">
+        <h1>Weather App</h1>
+        <form id="weatherForm" onsubmit="return submitForm()">
+            <label for="cityInput">Enter City:</label>
+            <input type="text" id="cityInput" name="city" placeholder="E.g., New York" required>
+            <button type="submit">Get Weather</button>
+        </form>
+        <div id="weatherInfo"></div>
+    </div>
+
+    <script>
+        function submitForm() {
+            var form = document.getElementById('weatherForm');
+            var cityInput = document.getElementById('cityInput');
+            var weatherInfo = document.getElementById('weatherInfo');
+
+            // Make an asynchronous request to get weather information
+            fetch("/get_weather", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                },
+                body: new URLSearchParams(new FormData(form)).toString(),
+            })
+            .then(response => response.text())
+            .then(data => {
+                weatherInfo.innerHTML = data; // Update the weather information
+            });
+
+            // Prevent the default form submission
+            return false;
+        }
+    </script>
+</body>
+</html>
