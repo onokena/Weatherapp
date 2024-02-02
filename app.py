@@ -19,7 +19,6 @@ def get_weather():
         return 'Please enter a city.'
 
     try:
-        # Use OpenWeatherMap API endpoint for getting city details (latitude and longitude)
         location_url = f'http://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}'
         location_response = requests.get(location_url)
         location_data = location_response.json()
@@ -28,7 +27,6 @@ def get_weather():
             latitude = location_data['coord']['lat']
             longitude = location_data['coord']['lon']
 
-            # Use OpenWeatherMap API endpoint for current weather conditions
             weather_url = f'http://api.openweathermap.org/data/2.5/weather?lat={latitude}&lon={longitude}&appid={api_key}&units=metric'
             weather_response = requests.get(weather_url)
             weather_data = weather_response.json()

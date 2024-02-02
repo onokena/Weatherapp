@@ -23,7 +23,6 @@
             var cityInput = document.getElementById('cityInput');
             var weatherInfo = document.getElementById('weatherInfo');
 
-            // Make an asynchronous request to get weather information
             fetch("/get_weather", {
                 method: "POST",
                 headers: {
@@ -33,10 +32,9 @@
             })
             .then(response => response.text())
             .then(data => {
-                weatherInfo.innerHTML = data; // Update the weather information
+                weatherInfo.innerHTML = data;
             });
 
-            // Prevent the default form submission
             return false;
         }
     </script>
